@@ -14,11 +14,18 @@
 <body>
 <div class="container mt-5">
     <ul class="list-group">
+        <a href="{{ route('dashboard') }}">Dashboard</a>
         <li class="list-group-item active" aria-current="true">게시글 리스트</li>
+        @auth
         <a href="/posts/create" class="btn btn-primary mt-3">게시글 작성</a>
+        @endauth
         @foreach($posts as $post)
         <li class="list-group-item">
-            <span>Title : {{ $post->title }}</span>
+            <span>
+                <a href="{{ route('post.show', ['id' => $post->id, 'page' => $posts-> currentPage()]) }}">
+                    Title : {{ $post->title }}
+                </a>
+            </span>
             <div>
                 {{ $post -> content }}
             </div>

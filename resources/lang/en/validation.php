@@ -151,6 +151,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => '타이틀이 잘못 됬어요',
+        'content' => '내용이 잘못 됬어요.',
+    ],
 
 ];

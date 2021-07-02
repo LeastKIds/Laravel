@@ -8,6 +8,24 @@ use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
+
+    public function __construct() {
+        $this -> middleware(['auth']) -> except(['index', 'show']);
+    }
+
+    public function show(Request $request, $id) {
+        $post = Post::find($id);
+
+
+        $page = $request -> page;
+        $post = Post::find($id);
+
+
+
+        return view('posts.show', compact('post', 'page'));
+
+    }
+
     public function create() {
         // dd('OK'); //디버깅 할 때 사용
         return view('posts.create');
@@ -24,6 +42,8 @@ class PostsController extends Controller
             'title' => 'required | min:3',
             'content' => 'required',
         ]);
+
+//        dd($content);
 
 //        dd($request);
         $post = new Post();
@@ -42,6 +62,7 @@ class PostsController extends Controller
 //        $posts = Post::latest() -> get();
         $posts = Post::latest() -> paginate(5);
 //        dd($posts[0] -> created_at);
+//        dd($posts);
         return view('posts.index', compact('posts'));
 //        return view('posts.index', ['posts' => $posts]);
     }

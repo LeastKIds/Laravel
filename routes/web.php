@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/posts/index');
 });
 
 Route::get('/dashboard', function () {
@@ -27,8 +27,9 @@ require __DIR__.'/auth.php';
 
 Route::prefix('/posts') -> group(function () {
 
-    Route::get('/create', [PostsController::class, 'create']);
-    Route::post('/store', [PostsController::class, 'store']);
-    Route::get('/index', [PostsController::class, 'index']);
+    Route::get('/create', [PostsController::class, 'create']); //-> middleware(['auth']);
+    Route::post('/store', [PostsController::class, 'store']); //-> middleware(['auth']);
+    Route::get('/index', [PostsController::class, 'index']) ->name('posts.index');
+    Route::get('/show/{id}', [PostsController::class, 'show']) -> name('post.show');
 });
 
