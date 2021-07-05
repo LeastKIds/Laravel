@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="/posts/store" method="post">
+    <form action="/posts/store" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
@@ -27,6 +27,14 @@
                       id="content" name="content" value = "{{ old('content') }}"></textarea>
             @error('content')
                 <div> {{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="file">File</label>
+            <input type="file" id="file" name="imageFile">
+            @error('imageFile')
+            <div> {{ $message }}</div>
             @enderror
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

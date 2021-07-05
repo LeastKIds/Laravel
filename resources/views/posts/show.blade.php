@@ -30,6 +30,17 @@
         </div>
 
         <div class="form-group">
+            <label for="imageFile">Post Image</label>
+            <div class="my-6 mx-3 w-3/12" >
+{{--                <img src="/storage/images/{{ $post -> image ?? 'default.jpeg'}}" class="img-thumbnail" width="50%"/>--}}
+                <img src="{{ $post -> imagePath() }}" class="img-thumbnail" width="50%"/>
+
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
             <label>등록일</label>
             <input type="text" class="form-control"  value = "{{ $post -> created_at -> diffForHumans() }}" readonly>
 

@@ -26,10 +26,10 @@
                     Title : {{ $post->title }}
                 </a>
             </span>
-            <div>
-                {{ $post -> content }}
-            </div>
-            <span>written on {{ $post -> created_at }}</span>
+{{--            <div>--}}
+{{--                {{ $post -> content }}--}}
+{{--            </div>--}}
+            <span>written on {{ $post -> created_at -> diffForHumans() }}</span>
             <hr>
         </li>
         @endforeach
