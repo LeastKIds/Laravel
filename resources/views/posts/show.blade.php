@@ -14,9 +14,7 @@
 <body>
 
     <div class="container">
-        <div class="m-5">
-            <a href="{{ route('posts.index', ['page' => $page]) }}">목록っd 보기</a>
-        </div>
+
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" value = "{{ $post -> title }}" readonly>
@@ -56,6 +54,12 @@
             <label>작성자</label>
             <input type="text" class="form-control"  value = "{{ $post -> user_id }}" readonly>
 
+        </div>
+
+        <div class="flex">
+            <button class="btn btn-warning" onclick="location.href='{{ route('post.edit' ,[ 'post' => $post -> id ]) }}'">수정</button>
+            <button class="btn btn-danger" onclick="location.href='{{ route('post.delete', [ 'id' => $post -> id ]) }}'">삭제</button>
+            <button class="btn btn-primary" onclick="location.href='{{ route('posts.index', ['page' => $page]) }}'">목록</button>
         </div>
 
     </div>

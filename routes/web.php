@@ -31,5 +31,9 @@ Route::prefix('/posts') -> group(function () {
     Route::post('/store', [PostsController::class, 'store']); //-> middleware(['auth']);
     Route::get('/index', [PostsController::class, 'index']) ->name('posts.index');
     Route::get('/show/{id}', [PostsController::class, 'show']) -> name('post.show');
+
+    Route::get('/{post}', [PostsController::class, 'edit']) -> name('post.edit');
+    Route::put('/{id}', [PostsController::class, 'update']) -> name('post.update');
+    Route::delete('/{id}', [PostsController::class, 'delete']) -> name('post.delete');
 });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostsController extends Controller
@@ -59,13 +60,7 @@ class PostsController extends Controller
 //      그 파일 이름을 컬럼에 설정
         if($request-> file('imageFile'))
         {
-            $extension = $request -> file('imageFile') -> extension();
-            $name = $request -> file('imageFile') -> getClientOriginalName();
-            $nameWithoutExtension = Str::of($name) -> basename('.'.$extension);
-            $fileName = $nameWithoutExtension . '_' . time() . '.' . $extension;
-
-            $request -> file('imageFile') -> storeAs('public/images', $fileName);
-            $post -> image = $fileName;
+            $post -> image = $this -> uploadPostImage($request);
         }
 
 
@@ -84,5 +79,57 @@ class PostsController extends Controller
 //        dd($posts);
         return view('posts.index', compact('posts'));
 //        return view('posts.index', ['posts' => $posts]);
+    }
+
+    public function edit(Post $post)
+    {
+        // 수정 폼 생성
+//        dd($post);
+        return view('posts.edit') -> with('post', $post);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request -> validate([
+            'title' => 'required | min:3',
+            'content' => 'required',
+            'imageFile' => 'image | max:2000'
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post -> title = $request -> title;
+        $post -> content = $request -> content;
+
+        if($request -> file('imageFile')) {
+            $imagePath = 'public/images/'.$post->image;
+            Storage::delete($imagePath);
+            $post -> image = $this -> uploadPostImage($request);
+        }
+
+        $post -> save();
+
+        return redirect() -> route('post.show', ['id' => $id]);
+
+
+        // 게시글을 데이터베이스에서 수정
+    }
+
+    public function destory($id)
+    {
+        // 파일 시스템에서 이미지 파일 삭제
+        // 게시글을 데이터베이스에서 삭제
+    }
+
+
+    private function uploadPostImage($request) {
+
+        $extension = $request -> file('imageFile') -> extension();
+        $name = $request -> file('imageFile') -> getClientOriginalName();
+        $nameWithoutExtension = Str::of($name) -> basename('.'.$extension);
+        $fileName = $nameWithoutExtension . '_' . time() . '.' . $extension;
+
+        $request -> file('imageFile') -> storeAs('public/images', $fileName);
+
+        return $fileName;
     }
 }
