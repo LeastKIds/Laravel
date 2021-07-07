@@ -21,6 +21,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+Route::get('/register', function () {
+    return view('/auth/register');
+}) -> name('register');
 
 require __DIR__.'/auth.php';
 
@@ -34,6 +37,6 @@ Route::prefix('/posts') -> group(function () {
 
     Route::get('/{post}', [PostsController::class, 'edit']) -> name('post.edit');
     Route::put('/{id}', [PostsController::class, 'update']) -> name('post.update');
-    Route::delete('/{id}', [PostsController::class, 'delete']) -> name('post.delete');
+    Route::delete('/{id}', [PostsController::class, 'destroy']) -> name('post.delete');
 });
 

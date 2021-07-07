@@ -24,7 +24,7 @@
         <div class="form-group">
             <label for="content">Content</label>
             <textarea class="form-control"
-                      id="content" name="content" value = "{{ old('content') }}"></textarea>
+                      id="content" name="content" >{{ old('content') }}</textarea>
             @error('content')
                 <div> {{ $message }}</div>
             @enderror

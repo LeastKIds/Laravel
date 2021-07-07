@@ -15,6 +15,7 @@
 <div class="container mt-5">
     <ul class="list-group">
         <a href="{{ route('dashboard') }}">Dashboard</a>
+        <a href="{{ route('register') }}">Register</a>
         <li class="list-group-item active" aria-current="true">게시글 리스트</li>
         @auth
         <a href="/posts/create" class="btn btn-primary mt-3">게시글 작성</a>

@@ -81,15 +81,20 @@ class PostsController extends Controller
 //        return view('posts.index', ['posts' => $posts]);
     }
 
-    public function edit(Post $post)
+    public function edit(Request $request, Post $post)
     {
         // 수정 폼 생성
 //        dd($post);
-        return view('posts.edit') -> with('post', $post);
+
+        $page = $request -> page;
+        return view('posts.edit', compact('post','page'));
     }
 
     public function update(Request $request, $id)
     {
+
+        $page = $request -> page;
+
         $request -> validate([
             'title' => 'required | min:3',
             'content' => 'required',
@@ -97,6 +102,18 @@ class PostsController extends Controller
         ]);
 
         $post = Post::findOrFail($id);
+
+////        Authorization 즉 수정 권한이 있는지 검사
+////        즉, 로그인한 사용자와 게시글의 작성자가 같은지 체크
+//
+//        if(auth() -> user() -> id != $post -> user_id) {
+//            abort(403);
+//        }
+
+        if($request -> user() -> cannot('update', $post)) {
+            abort(403);
+        }
+
         $post -> title = $request -> title;
         $post -> content = $request -> content;
 
@@ -108,16 +125,33 @@ class PostsController extends Controller
 
         $post -> save();
 
-        return redirect() -> route('post.show', ['id' => $id]);
+        return redirect() -> route('post.show', compact('id','page'));
 
 
         // 게시글을 데이터베이스에서 수정
     }
 
-    public function destory($id)
+    public function destroy(Request $request, $id)
     {
         // 파일 시스템에서 이미지 파일 삭제
         // 게시글을 데이터베이스에서 삭제
+        $page = $request -> page;
+
+        $post = Post::findOrFail($id);
+
+        if($request -> user() -> cannot('delete', $post)) {
+            abort(403);
+        }
+
+
+        if($post -> image){
+            $imagePath = 'public/images/'.$post -> image;
+            Storage::delete($imagePath);
+        }
+
+        $post -> delete();
+
+        return redirect() -> route('posts.index', compact('page'));
     }
 
 

@@ -56,11 +56,24 @@
 
         </div>
 
-        <div class="flex">
-            <button class="btn btn-warning" onclick="location.href='{{ route('post.edit' ,[ 'post' => $post -> id ]) }}'">수정</button>
-            <button class="btn btn-danger" onclick="location.href='{{ route('post.delete', [ 'id' => $post -> id ]) }}'">삭제</button>
-            <button class="btn btn-primary" onclick="location.href='{{ route('posts.index', ['page' => $page]) }}'">목록</button>
-        </div>
+        @auth
+{{--            @if(auth() -> user() -> id == $post -> user_id)--}}
+            @can('update', $post)
+                <div class="flex">
+
+                    <button class="btn btn-warning" onclick="location.href='{{ route('post.edit' ,[ 'post' => $post -> id , 'page' => $page]) }}'">수정</button>
+
+                    <form action="{{ route('post.delete', [ 'id' => $post -> id , 'page' => $page]) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-danger" type="submit">삭제</button>
+                    </form>
+            @endcan
+{{--            @endif--}}
+        @endauth
+                    <button class="btn btn-primary" onclick="location.href='{{ route('posts.index', ['page' => $page]) }}'">목록</button>
+                </div>
+
 
     </div>
 
