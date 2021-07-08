@@ -154,7 +154,24 @@ class PostsController extends Controller
         return redirect() -> route('posts.index', compact('page'));
     }
 
+    public function myPosts() {
 
+
+
+
+        $id = Auth::user() ->id;
+
+        $posts = Post::where('user_id', $id) -> latest() -> paginate(5);
+
+//        $posts = auth() -> user() -> posts() -> latest-> paginate(5);
+
+        return view('posts.myPosts', compact('posts'));
+    }
+
+
+
+
+//   이미지 올리기
     private function uploadPostImage($request) {
 
         $extension = $request -> file('imageFile') -> extension();
