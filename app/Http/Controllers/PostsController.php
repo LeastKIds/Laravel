@@ -21,6 +21,8 @@ class PostsController extends Controller
 
         $page = $request -> page;
         $post = Post::find($id);
+        $post -> count ++ ; // 들어갈 때 마다 조회수 증가
+        $post -> save();    // DB에 반영
 
 
 
