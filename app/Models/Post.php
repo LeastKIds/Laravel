@@ -23,4 +23,11 @@ class Post extends Model
     public function user() {
         return $this -> belongsTo(User::class);
     }
+
+    public function viewers() {
+        return $this -> belongsToMany(User::class, 'post_user',
+            'post_id','user_id','id','id','users');
+
+//        return $this -> belongsToMany(User::class);   // 위와 같이 알아서 써줌(생략 가능) 피버테이블이 두 개인 경우에는 최소한 테이블 이름은 적어야 함
+    }
 }

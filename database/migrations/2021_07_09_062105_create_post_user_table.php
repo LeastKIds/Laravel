@@ -19,7 +19,7 @@ class CreatePostUserTable extends Migration
             $table -> foreignId('user_id') -> constrained() -> onDelete('cascade');
             $table -> foreignId('post_id') -> constrained() -> onDelete('cascade');
 
-            $table->timestamp('created_at');
+            $table->timestamp('created_at') ->useCurrent(); // useCurrent() : 현재 시간
 
             $table -> unique(['user_id', 'post_id']);
         });
@@ -30,7 +30,7 @@ class CreatePostUserTable extends Migration
      *
      * @return void
      */
-    public function
+    public function down()
     {
         Schema::dropIfExists('post_user');
     }

@@ -44,4 +44,10 @@ class User extends Authenticatable
     public function posts() {
         return $this -> hasMany(Post::class);
     }
+
+    public function viewed_posts() {
+//        return $this -> belongsToMany(Post::class);   // 피버 테이블이 두 개 인경우 아래로 코딩을 해야함(적어도 테이블 이름은 적어줌)
+        return $this -> belongsToMany(Post::class,'post_user','user_id'
+            , 'post_id','id','id','posts');
+    }
 }

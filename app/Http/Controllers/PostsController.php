@@ -21,9 +21,19 @@ class PostsController extends Controller
 
         $page = $request -> page;
         $post = Post::find($id);
-        $post -> count ++ ; // 들어갈 때 마다 조회수 증가
-        $post -> save();    // DB에 반영
+//        $post -> count ++ ; // 들어갈 때 마다 조회수 증가
+//        $post -> save();    // DB에 반영
 
+        /*
+         * 이 글을 조회한 사용자들 중에, 현재
+         * 로그인한 사용자가 포함되어 있는지를 체크하고
+         * 포함되어 있지 않으면 추가,
+         * 포함되어 있으면 다음 단계로 넘어감
+         */
+
+        if($post -> viewers -> contains(Auth::user()) == false && Auth::user() != null) {
+            $post -> viewers() -> attach(Auth::user() -> id);
+        }
 
 
         return view('posts.show', compact('post', 'page'));
