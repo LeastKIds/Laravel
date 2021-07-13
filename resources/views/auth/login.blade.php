@@ -62,7 +62,7 @@
 
             <div>
                 <button class="bg-blue-100 hover:bg-blue-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-2 ml-2 mt-3">
-                    <a href="">Google login</a>
+                    <a href="{{ route('google.login') }}">Google login</a>
                 </button>
             </div>
 
