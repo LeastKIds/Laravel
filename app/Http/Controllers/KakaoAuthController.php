@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
-class GoogleAuthController extends Controller
+class KakaoAuthController extends Controller
 {
     //
 
@@ -19,11 +19,13 @@ class GoogleAuthController extends Controller
     }
 
     public function redirect() {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('kakao')->redirect();
     }
 
     public function callback() {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('kakao')->user();
+
+        dd($user);
 
         $user = User::firstOrCreate(
             ['email' => $user -> getEmail()],

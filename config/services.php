@@ -42,4 +42,10 @@ return [
         'redirect' => 'http://localhost:8000/google/callback'
     ],
 
+    'kakao' => [
+        'client_id' => env('KAKAO_CLIENT_ID'),
+        'client_secret' => env('KAKAO_CLIENT_SECRET'),
+        'redirect' => 'http://localhost:8000/kakao/callback'
+    ],
+
 ];

@@ -68,7 +68,7 @@
 
             <div>
                 <button class="bg-yellow-100 hover:bg-yellow-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-2 ml-2 mt-3">
-                    <a href="">Kakao login</a>
+                    <a href="{{ route('kakao.login') }}">Kakao login</a>
                 </button>
             </div>
 
