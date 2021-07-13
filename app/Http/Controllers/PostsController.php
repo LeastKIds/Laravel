@@ -29,6 +29,8 @@ class PostsController extends Controller
          * 로그인한 사용자가 포함되어 있는지를 체크하고
          * 포함되어 있지 않으면 추가,
          * 포함되어 있으면 다음 단계로 넘어감
+         *
+         * 사용자가 많아지면 부하가 걸릴 만한 코드 (n + 1)
          */
 
         if($post -> viewers -> contains(Auth::user()) == false && Auth::user() != null) {

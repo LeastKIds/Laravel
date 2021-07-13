@@ -52,5 +52,29 @@
                 </x-button>
             </div>
         </form>
+        <div class="flex">
+            <div>
+                <button class="bg-gray-100 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-2 mt-3 ml-2">
+                    <a href="{{ route('github.login') }}">Github login</a>
+                </button>
+
+            </div>
+
+            <div>
+                <button class="bg-blue-100 hover:bg-blue-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-2 ml-2 mt-3">
+                    <a href="">Google login</a>
+                </button>
+            </div>
+
+            <div>
+                <button class="bg-yellow-100 hover:bg-yellow-400 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-2 ml-2 mt-3">
+                    <a href="">Kakao login</a>
+                </button>
+            </div>
+
+        </div>
+
     </x-auth-card>
+
+
 </x-guest-layout>

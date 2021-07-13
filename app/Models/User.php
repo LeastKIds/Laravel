@@ -16,6 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+//    여기에 쓰여 있어야만 create로 넣을 수 있다.
     protected $fillable = [
         'name',
         'email',
