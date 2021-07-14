@@ -25,8 +25,6 @@ class KakaoAuthController extends Controller
     public function callback() {
         $user = Socialite::driver('kakao')->user();
 
-        dd($user);
-
         $user = User::firstOrCreate(
             ['email' => $user -> getEmail()],
             ['password' => Hash::make(Str::random(24)),
