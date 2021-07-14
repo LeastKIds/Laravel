@@ -11,7 +11,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 class KakaoAuthController extends Controller
 {
-    //
+
+//      curl -v -X POST "https://kapi.kakao.com/v1/user/unlink"
+//      -H "Authorization: KakaoAK {6b8822b1870ed966e288d253d046d54f}”
+//      -d "target_id_type= user_id"
+//      -d "target_id= 1716843814"
+//      카카오톡 아이디 연결 해제
+
 
     public function __construct()
     {
