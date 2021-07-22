@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\testController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,3 +51,10 @@ Route::prefix('/posts') -> group(function () {
 Route::prefix('/chart') -> group(function () {
     Route::get('/index', [ChartController::class, 'index']);
 });
+
+
+Route::prefix('/test') -> group(function () {
+    Route::get('/get', [testController::class, 'get']);
+    Route::get('/login/error', [testController::class, 'loginError']) -> name('test.loginError');
+});
+

@@ -82,4 +82,3 @@ Route::prefix('/kakao') -> group(function () {
     Route::get('/login', [KakaoAuthController::class, 'redirect']) -> name('kakao.login');
     Route::get('/callback', [KakaoAuthController::class, 'callback']);
 });
-
